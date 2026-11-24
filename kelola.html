@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Menu Kaka (KASIR001) - Kasir Cemerlang</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .badge-kasir {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-top: 6px;
+    }
+    .crud-box {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #1e293b;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #f8fafc;
+    }
+    .preview-wrapper {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .preview-wrapper img {
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+    }
+    .crud-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-edit {
+      flex: 1;
+      background: #f59e0b;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-hapus {
+      flex: 1;
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-default {
+      background: #0f172a;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .toolbar-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div>
+      <h1>⚙️ Kelola Menu</h1>
+      <p>Tambah, Edit, dan Hapus Menu Kasir</p>
+      <span class="badge-kasir">👤 Kasir: Kaka (KASIR001)</span>
+    </div>
+    <a href="index.html" style="text-decoration:none; background:#10b981; color:#fff; padding:8px 14px; border-radius:8px; font-size:14px; font-weight:600;">
+      ← Kembali ke Kasir
+    </a>
+  </header>
+
+  <!-- FORM TAMBAH / EDIT MENU -->
+  <section class="crud-box">
+    <h3 id="form-judul" style="margin-top:0;">➕ Tambah Menu Baru</h3>
+
+    <form id="form-menu">
+      <input type="hidden" id="edit-id" value="">
+
+      <div class="form-group">
+        <label for="input-nama">Nama Menu</label>
+        <input type="text" id="input-nama" placeholder="Contoh: 🍜 Mie Ayam Spesial" required>
+      </div>
+
+      <div class="form-group">
+        <label for="input-harga">Harga (Rp)</label>
+        <input type="number" id="input-harga" placeholder="Contoh: 15000" min="100" step="100" required>
+      </div>
+
+      <div class="form-group">
+        <label for="input-gambar">Pilih Foto dari Galeri</label>
+        <input type="file" id="input-gambar" accept="image/*">
+        <div class="preview-wrapper">
+          <img id="preview-gambar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100%' height='100%' fill='%23e2e8f0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2364748b' font-family='sans-serif' font-size='11'>Preview</text></svg>" alt="Preview Menu">
+          <small id="info-gambar" style="color:#64748b;">Pilih gambar dari galeri HP/PC (otomatis dikompresi).</small>
+        </div>
+      </div>
+
+      <div class="action-btns">
+        <button type="submit" id="btn-simpan" class="btn-main">
+          💾 Simpan Menu
+        </button>
+        <button type="button" id="btn-batal" class="btn-reset hidden">
+          Batal Edit
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- DAFTAR MENU -->
+  <div class="toolbar-menu">
+    <h3 class="judul-menu" style="margin:0;">📋 Menu Kaka (<span id="jumlah-menu">0</span>)</h3>
+    <button type="button" id="btn-seed-default" class="btn-default">
+      📥 Isi 6 Menu Awal
+    </button>
+  </div>
+
+  <div id="daftar-kelola-menu" class="menu-grid">
+    <p class="keranjang-kosong">Memuat data menu Kaka...</p>
+  </div>
+
+</div>
+
+<!-- NOTIFIKASI -->
+<div id="notifikasi-kasir" class="notifikasi hidden"></div>
+
+<script type="module" src="kelola.js"></script>
+</body>
+</html>

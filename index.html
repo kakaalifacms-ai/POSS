@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasir Cemerlang</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div>
+      <h1>🛒 Kasir Cemerlang</h1>
+      <p>Sistem Kasir Digital dan Pembayaran QR</p>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="kelola.html" style="text-decoration:none; background:#2563eb; color:#fff; padding:8px 12px; border-radius:8px; font-size:14px; font-weight:600;">
+        ⚙️ Kelola Menu
+      </a>
+      <span class="status-online">● Aktif</span>
+    </div>
+  </header>
+
+  <!-- SALDO -->
+  <section class="saldo-box">
+    <div class="saldo-header">
+      <span>💰 Saldo Kasir</span>
+      <span class="saldo-status">● Aktif</span>
+    </div>
+
+    <h2 id="saldo-kasir">Rp0</h2>
+
+    <div class="saldo-footer">
+      <span>📈 Total Pemasukan</span>
+      <strong id="total-pemasukan">Rp0</strong>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <h3 class="judul-menu">🍽️ Menu Makanan & Minuman</h3>
+
+  <div id="menu-grid" class="menu-grid">
+    <p class="keranjang-kosong">Memuat daftar menu...</p>
+  </div>
+
+  <!-- KERANJANG -->
+  <section class="keranjang-box">
+    <h3>🛒 Keranjang Belanja</h3>
+
+    <div id="daftar-keranjang">
+      <p class="keranjang-kosong">Belum ada pesanan.</p>
+    </div>
+  </section>
+
+  <!-- TOTAL -->
+  <section class="summary-box">
+    <h3>Total Tagihan</h3>
+
+    <div id="total-harga" class="total-teks">Rp0</div>
+
+    <div class="action-btns">
+      <button id="btn-bayar" class="btn-main" disabled onclick="buatTransaksiQR()">
+        Buat QR
+      </button>
+
+      <button id="btn-reset" class="btn-reset" onclick="resetKeranjang()">
+        Reset
+      </button>
+    </div>
+  </section>
+
+  <!-- QR -->
+  <section id="qr-section" class="qr-section hidden">
+
+    <h3>📱 Pembayaran QR</h3>
+
+    <p class="id-label">ID Transaksi</p>
+    <h3 id="tx-id-display">-</h3>
+
+    <div class="qr-wrapper">
+      <canvas id="qr-canvas"></canvas>
+    </div>
+
+    <div id="status-box" class="status-box status-pending">
+      ⏳ <strong id="status-teks">Menunggu pembayaran...</strong>
+    </div>
+
+    <p class="qr-info">
+      QR ini berisi ID transaksi untuk konfirmasi pembayaran.
+    </p>
+
+  </section>
+
+</div>
+
+<!-- NOTIFIKASI -->
+<div id="notifikasi-kasir" class="notifikasi hidden"></div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
